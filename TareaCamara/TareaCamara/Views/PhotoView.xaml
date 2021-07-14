@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TareaCamara.Views.PhotoView"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TareaCamara.ViewModels"
+             Title="Pictures">
+    
+    <ContentPage.BindingContext>
+        <vm:PhotoViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="LightCyan">
+            <Image  x:Name="txtfoto" Source="{Binding Photo}" WidthRequest="300" HeightRequest="300" Aspect="AspectFit" />
+            
+            <Entry x:Name="txtNombre" Placeholder="Nombre"></Entry>
+            <Entry x:Name="txtDescripcion" Placeholder="Descripcion"></Entry>
+            <ScrollView BackgroundColor="Gray">
+                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition  Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Text="Tomar Foto" Grid.Row="0" Grid.Column="0" WidthRequest="300" Command="{Binding TakePhotoCommand}" />
+                <Button Text="Escoger Foto" Grid.Row="0" Grid.Column="1" WidthRequest="300"    Command="{Binding ChoosePhotoCommand}" />
+                <Button x:Name="btnAdd" Grid.Row="1"  Grid.Column="0" WidthRequest="300" Text="Agregar a SQLite" Clicked="BtnAdd_Clicked" />
+                <Button x:Name="btnRead" Grid.Row="1" Grid.Column="1" WidthRequest="300" Text="leer" Clicked="BtnRead_Clicked" />
+                </Grid>
+            </ScrollView>
+
+            <ScrollView>
+
+                    <ListView x:Name="lstfotos">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Nombre}" Detail="{Binding CodigoID}"></TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+   
